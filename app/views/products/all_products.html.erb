@@ -1,0 +1,18 @@
+<h1>Mark's Super Sketchy Store</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Image</th>
+  </tr>
+  <% @all_products.each do |product| %>
+  <tr>
+    <td><%= product.name %></td>
+    <td><%= product.description %></td>
+    <td><%= product.price %></td>
+    <td> <img src=<%= product.image %>></td>
+  </tr>
+  <% end %>
+</table>

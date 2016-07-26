@@ -5,3 +5,5 @@
   <li><img src="<%= @product.image %>"></li>
 </ul>
 
+<%= link_to "Edit", "/products/#{@product.id}/edit" %>
+<%= link_to "Delete", "/products/#{@product.id}", method: :delete %>

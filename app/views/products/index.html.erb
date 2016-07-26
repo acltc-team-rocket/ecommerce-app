@@ -1,22 +1,13 @@
 <h1>Mark's Super Sketchy Store</h1>
 
-<table class="table">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Image</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
+<div class="row">
   <% @products.each do |product| %>
-  <tr>
-    <td><%= link_to product.name, "/products/#{product.id}" %></td>
-    <td><%= product.description %></td>
-    <td><%= product.price %></td>
-    <td> <img class="img-responsive" src=<%= product.image %>></td>
-    <td><%= link_to "Edit", "/products/#{product.id}/edit" %></td>
-    <td><%= link_to "Delete", "/products/#{product.id}", method: :delete %></td>
-  </tr>
+    <div class="col-md-4">
+      <a href="/products/<%= product.id %>">
+        <img src="<%= product.image %>" width="200" height="200">
+        <p><%= product.name %></p>
+        <p><%= product.price %></p>
+      </a>
+    </div>
   <% end %>
-</table>
+</div>

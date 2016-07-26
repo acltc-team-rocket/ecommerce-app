@@ -18,6 +18,8 @@ class ProductsController < ApplicationController
     image_url = params[:image]
     product = Product.new(name: name, price: price, description: description, image: image_url)
     product.save
+    flash[:message] = "Product Created!!!!!"
+    redirect_to "/products/#{product.id}"
   end
 
   def edit
@@ -31,6 +33,8 @@ class ProductsController < ApplicationController
     product.description = params[:description]
     product.image = params[:image]
     product.save
+    flash[:message] = "Product Updated!"
+    redirect_to "/products/#{product.id}"
   end
 
   def destroy

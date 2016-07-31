@@ -1,13 +1,23 @@
-<ul>
-  <li><%= @product.sale_message.humanize %></li>
-  <li>Name: <%= @product.name %></li>
-  <li>Description: <%= @product.description %></li>
-  <li>Supplier: <%= @product.supplier.name %></li>
-  <li class="<%= @product.sale_message %>">Price: <%= number_to_currency(@product.price) %></li>
-  <li>Tax: <%= number_to_currency(@product.tax) %></li>
-  <li>Total: <%= number_to_currency(@product.total) %></li>
-  <li><img src="<%= @product.image %>"></li>
-</ul>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <ul class="info-background">
+        <li><%= @product.sale_message.humanize %></li>
+        <li>Name: <%= @product.name %></li>
+        <li>Description: <%= @product.description %></li>
+        <li>Supplier: <%= @product.supplier.name %></li>
+        <li class="<%= @product.sale_message %>">Price: <%= number_to_currency(@product.price) %></li>
+        <li>Tax: <%= number_to_currency(@product.tax) %></li>
+        <li>Total: <%= number_to_currency(@product.total) %></li>
+        <li><%= link_to "Edit", "/products/#{@product.id}/edit" %></li> 
+        <li><%= link_to "Delete", "/products/#{@product.id}", method: :delete %></li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <% @product.images.each do |image| %>
+        <img class="image-show img-responsive" src="<%= image.url %>">
+      <% end %>
+    </div>
+  </div>
 
-<%= link_to "Edit", "/products/#{@product.id}/edit" %>
-<%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
+

@@ -6,7 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
@@ -32,16 +32,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><%= link_to "Sort Price, Lowest to Highest", "/products?sort=asc" %></li>
-            <li><%= link_to "Sort Price, Highest to Lowest", "/products?sort=desc" %></li>
-            <li><%= link_to "Discount Items", "/products?discount=true" %></li>
-            <li><%= link_to "Random Product", "/products/random" %></li>
-
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Sort Price, Lowest to Highest", "/products?sort=asc" %></li>
+                <li><%= link_to "Sort Price, Highest to Lowest", "/products?sort=desc" %></li>
+                <li><%= link_to "Discount Items", "/products?discount=true" %></li>
+                <li><%= link_to "Random Product", "/products/random" %></li>
+              </ul>
+            </li>
+          </ul>
+            
           </ul>
             <%= form_tag "/products/search", class: "navbar-form navbar-left", method: :post do %>
               <div class="form-group">
-                <%= label_tag :user_search %>
+                <%= label_tag :user_search, "Search", class: "search-box" %>
                 <%= text_field_tag :user_search %>
               </div>
               <%= submit_tag "Search Products" %>
@@ -51,11 +56,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><%= link_to "Sort Price, Lowest to Highest", "/products?sort=asc" %></li>
+                <li><%= link_to "Sort Price, Highest to Lowest", "/products?sort=desc" %></li>
+                <li><%= link_to "Discount Items", "/products?discount=true" %></li>
+                <li><%= link_to "Random Product", "/products/random" %></li>
               </ul>
             </li>
           </ul>

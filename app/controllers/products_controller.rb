@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+
   end
 
   def create
@@ -26,8 +27,11 @@ class ProductsController < ApplicationController
     price = params[:price]
     description = params[:description]
     image_url = params[:image]
-    product = Product.new(name: name, price: price, description: description, image: image_url)
-    product.save
+    product = Product.new(name: name, price: price, description: description, supplier_id: params[:supplier][:supplier_id])
+    if product.save
+      image = Image.new(product_id: product.id, url: image_url)
+      image.save
+    end
     flash[:success] = "Product Created!!!!!"
     redirect_to "/products/#{product.id}"
   end
@@ -55,7 +59,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.where("name LIKE ? OR description LIKE ? OR price LIKE ?", "%#{params[:user_search]}%", "%#{params[:user_search]}%", params[:user_search])
+    @products = Product.where("name LIKE ? OR description LIKE ?", "%#{params[:user_search]}%", "%#{params[:user_search]}%")
     render :index
   end
 

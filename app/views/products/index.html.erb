@@ -1,12 +1,16 @@
-<h1>Mark's Super Sketchy Store</h1>
+<h1>Available Products</h1>
 
 <div class="row">
   <% @products.each do |product| %>
     <div class="col-md-4">
       <a href="/products/<%= product.id %>">
-        <img src="<%= product.image %>" width="200" height="200">
+        <div class="img-wrapper">
+          <img class="img-responsive" src="<%= product.images.first.url if product.images.any? %>">
+        </div>
+      <div class="info-background">
         <p><%= product.name %></p>
-        <p><%= product.price %></p>
+        <p><%= number_to_currency(product.price) %></p>
+      </div>
       </a>
     </div>
   <% end %>

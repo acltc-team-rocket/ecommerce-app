@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  belongs_to :supplier
 
   def sale_message
     if price.to_i < 15

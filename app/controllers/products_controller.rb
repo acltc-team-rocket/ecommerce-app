@@ -1,11 +1,21 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    if params[:sort]
+      @products = Product.order(price: params[:sort])
+    elsif params[:discount]
+      @products = Product.where("price < ?", 15)
+    else
+      @products = Product.all
+    end
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
+    if params[:id] == "random"
+      @product = Product.all.sample
+    else
+      @product = Product.find_by(id: params[:id])
+    end
   end
 
   def new
@@ -42,6 +52,11 @@ class ProductsController < ApplicationController
     product.destroy
     flash[:warning] = "Product Deleted!!!"
     redirect_to "/products"
+  end
+
+  def search
+    @products = Product.where("name LIKE ? OR description LIKE ? OR price LIKE ?", "%#{params[:user_search]}%", "%#{params[:user_search]}%", params[:user_search])
+    render :index
   end
 
 

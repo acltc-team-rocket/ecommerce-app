@@ -1,7 +1,10 @@
 <ul>
+  <li><%= @product.sale_message.humanize %></li>
   <li>Name: <%= @product.name %></li>
   <li>Description: <%= @product.description %></li>
-  <li>Price: <%= @product.price %></li>
+  <li class="<%= @product.sale_message %>">Price: <%= number_to_currency(@product.price) %></li>
+  <li>Tax: <%= number_to_currency(@product.tax) %></li>
+  <li>Total: <%= number_to_currency(@product.total) %></li>
   <li><img src="<%= @product.image %>"></li>
 </ul>
 

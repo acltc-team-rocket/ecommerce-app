@@ -11,6 +11,7 @@
         <li>Total: <%= number_to_currency(@product.total) %></li>
         <li><%= link_to "Edit", "/products/#{@product.id}/edit" %></li> 
         <li><%= link_to "Delete", "/products/#{@product.id}", method: :delete %></li>
+        <li><%= link_to "Add Image", "/images/new" %></li>
       </ul>
     </div>
     <div class="col-md-4">

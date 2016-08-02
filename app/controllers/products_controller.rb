@@ -29,11 +29,15 @@ class ProductsController < ApplicationController
     image_url = params[:image]
     product = Product.new(name: name, price: price, description: description, supplier_id: params[:supplier][:supplier_id])
     if product.save
-      image = Image.new(product_id: product.id, url: image_url)
-      image.save
+      flash[:success] = "Product Created!!!!!"
+      # image = Image.new(product_id: product.id, url: image_url)
+      # image.save
+      redirect_to "/products/#{product.id}"
+    else
+      flash[:danger] = "Product Not Created!!!!!"
+      redirect_to "/products/new"
     end
-    flash[:success] = "Product Created!!!!!"
-    redirect_to "/products/#{product.id}"
+    
   end
 
   def edit

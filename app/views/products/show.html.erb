@@ -13,6 +13,14 @@
         <li><%= link_to "Delete", "/products/#{@product.id}", method: :delete %></li>
         <li><%= link_to "Add Image", "/images/new" %></li>
       </ul>
+      <%= form_tag "/orders", method: :post do %>
+        <div>
+          <%= label_tag :quantity %>
+          <%= text_field_tag :quantity %>
+        </div>
+        <%= hidden_field_tag :product_id, @product.id %>          
+        <%= submit_tag "Buy Now!!!!" %>  
+      <% end %>
     </div>
     <div class="col-md-4">
       <% @product.images.each do |image| %>

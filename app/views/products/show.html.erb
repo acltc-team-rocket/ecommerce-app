@@ -7,19 +7,26 @@
         <li>Description: <%= @product.description %></li>
         <li>Supplier: <%= @product.supplier.name %></li>
         <li class="<%= @product.sale_message %>">Price: <%= number_to_currency(@product.price) %></li>
+        <li>Categories:
+          <ul>
+            <% @product.categories.each do |category| %>
+              <li><%= category.name %></li>
+            <% end %>
+          </ul>
+        </li>
         <li>Tax: <%= number_to_currency(@product.tax) %></li>
         <li>Total: <%= number_to_currency(@product.total) %></li>
         <li><%= link_to "Edit", "/products/#{@product.id}/edit" %></li> 
         <li><%= link_to "Delete", "/products/#{@product.id}", method: :delete %></li>
         <li><%= link_to "Add Image", "/images/new" %></li>
       </ul>
-      <%= form_tag "/orders", method: :post do %>
+      <%= form_tag "/carted_products", method: :post do %>
         <div>
           <%= label_tag :quantity %>
           <%= text_field_tag :quantity %>
         </div>
         <%= hidden_field_tag :product_id, @product.id %>          
-        <%= submit_tag "Buy Now!!!!" %>  
+        <%= submit_tag "Add to Cart" %>  
       <% end %>
     </div>
     <div class="col-md-4">

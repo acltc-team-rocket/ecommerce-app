@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show, :search]
 
   def index
     if params[:sort]
@@ -21,7 +22,6 @@ class ProductsController < ApplicationController
   end
 
   def new
-
   end
 
   def create
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     price = params[:price]
     description = params[:description]
     image_url = params[:image]
-    product = Product.new(name: name, price: price, description: description)
+    product = Product.new(name: name, price: price, description: description, supplier_id: params[:supplier][:supplier_id])
     if product.save
       flash[:success] = "Product Created!!!!!"
       # image = Image.new(product_id: product.id, url: image_url)

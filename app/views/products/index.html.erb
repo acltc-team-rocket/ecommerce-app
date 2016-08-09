@@ -1,5 +1,7 @@
 <h1>Available Products</h1>
-
+<% if current_user && current_user.admin %>
+  <p><%= link_to "Add Product", "/products/new" %></p>
+<% end %>
 <div class="row">
   <% @products.each do |product| %>
     <div class="col-md-4">

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
   helper_method :current_user, :human_date_and_time
 
   def current_user
@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
 
   def human_date_and_time(date)
     date.strftime("%b %e, %l:%M %p")
+  end
+
+  def authenticate_admin!
+    if current_user && current_user.admin 
+      #do nothing
+    else
+      flash[:danger] = "Get out of here hacker!"
+      redirect_to "/"
+    end
   end
 
 end

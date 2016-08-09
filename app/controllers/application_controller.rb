@@ -11,11 +11,16 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin!
-    if current_user && current_user.admin 
-      #do nothing
-    else
+    unless current_user && current_user.admin 
       flash[:danger] = "Get out of here hacker!"
       redirect_to "/"
+    end
+  end
+
+  def authenticate_user!
+    unless current_user
+      flash[:info] = "Please sign in or sign up to order!!!"
+      redirect_to "/login"
     end
   end
 

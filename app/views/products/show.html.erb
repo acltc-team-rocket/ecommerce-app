@@ -22,13 +22,17 @@
           <li><%= link_to "Add Image", "/images/new" %></li>
         <% end %>
       </ul>
-      <%= form_tag "/carted_products", method: :post do %>
-        <div>
-          <%= label_tag :quantity %>
-          <%= text_field_tag :quantity %>
-        </div>
-        <%= hidden_field_tag :product_id, @product.id %>          
-        <%= submit_tag "Add to Cart" %>  
+      <% if current_user %>
+        <%= form_tag "/carted_products", method: :post do %>
+          <div>
+            <%= label_tag :quantity %>
+            <%= text_field_tag :quantity %>
+          </div>
+          <%= hidden_field_tag :product_id, @product.id %>          
+          <%= submit_tag "Add to Cart" %>
+        <% end %>
+      <% else %> 
+        <p>Sign up to order our stuff!!!</p>
       <% end %>
     </div>
     <div class="col-md-4">

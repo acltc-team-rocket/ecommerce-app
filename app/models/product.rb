@@ -7,7 +7,8 @@ class Product < ApplicationRecord
   has_many :categorized_products
   has_many :categories, through: :categorized_products
 
-  validates :name, presence: true
+  validates :name, :description, :price, presence: true
+  validates :price, numericality: {greater_than: 0}
 
   TAXRATE = 0.09
 

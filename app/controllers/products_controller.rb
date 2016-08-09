@@ -48,14 +48,17 @@ class ProductsController < ApplicationController
   end
 
   def update
-    product = Product.find_by(id: params[:id])
-    product.name = params[:name]
-    product.price = params[:price]
-    product.description = params[:description]
-    product.image = params[:image]
-    product.save
-    flash[:success] = "Product Updated!"
-    redirect_to "/products/#{product.id}"
+    @product = Product.find_by(id: params[:id])
+    @product.name = params[:name]
+    @product.price = params[:price]
+    @product.description = params[:description]
+    if @product.save
+      flash[:success] = "Product Updated!"
+      redirect_to "/products/#{product.id}"
+    else
+      flash[:danger] = "Product NOT Updated!"
+      render :edit
+    end
   end
 
   def destroy

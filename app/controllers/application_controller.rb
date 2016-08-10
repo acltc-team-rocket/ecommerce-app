@@ -27,11 +27,18 @@ class ApplicationController < ActionController::Base
 
   def calculate_cart_count
     if current_user && current_user.orders.find_by(completed: false)
-     @cart_count = 0
-     current_user.orders.find_by(completed: false).carted_products.each do |carted_product|
-       @cart_count += carted_product.quantity
-     end
-   end
+      if session[:cart_count]
+        @cart_count = session[:cart_count]
+      else
+        @cart_count = 0
+        current_user.orders.find_by(completed: false).carted_products.each do |carted_product|
+          @cart_count += carted_product.quantity
+        end
+        session[:cart_count] = @cart_count
+      end
+    else
+      @cart_count = 0
+    end
   end
 
 end

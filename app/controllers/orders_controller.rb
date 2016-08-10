@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
     total = total_subtotal + total_tax
     order.assign_attributes(completed: true, tax: total_tax, subtotal: total_subtotal, total: total)
     order.save
+    session[:cart_count] = nil
     redirect_to "/orders/#{order.id}"
   end
 end
